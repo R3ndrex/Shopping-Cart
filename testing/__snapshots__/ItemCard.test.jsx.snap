@@ -9,7 +9,7 @@ exports[`Item Card > renders correctly 1`] = `
       Title
     </h2>
     <div
-      class="relative "
+      class="relative"
     >
       <svg
         aria-hidden="true"
@@ -50,7 +50,9 @@ exports[`Item Card > renders correctly 1`] = `
       min="1"
       name="Title-amount"
       placeholder="Amount"
+      required=""
       type="number"
+      value=""
     />
     <button
       type="submit"
