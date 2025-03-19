@@ -16,7 +16,7 @@ export default function StorePage() {
                     <ul className="store-items">
                         {products.map((product) => (
                             <ItemCard
-                                key={product.title}
+                                key={product.id}
                                 setSelectedItems={setSelectedItems}
                                 product={product}
                             />
