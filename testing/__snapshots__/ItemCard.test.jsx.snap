@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Item Card > renders correctly 1`] = `
+<div>
+  <form
+    class="store-item"
+  >
+    <h2>
+      Title
+    </h2>
+    <div
+      class="relative "
+    >
+      <svg
+        aria-hidden="true"
+        class="absolute left-0 h-[3rem] top-1/2"
+        data-slot="icon"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <img
+        alt="Title"
+        class="w-max"
+      />
+      <svg
+        aria-hidden="true"
+        class="absolute right-0 h-[3rem] top-1/2"
+        data-slot="icon"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </div>
+    <input
+      id="Title-amount"
+      max="100"
+      min="1"
+      name="Title-amount"
+      placeholder="Amount"
+      type="number"
+    />
+    <button
+      type="submit"
+    >
+      Add to cart
+    </button>
+  </form>
+</div>
+`;
