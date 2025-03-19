@@ -15,16 +15,43 @@ describe("Item Card", () => {
         render(
             <ItemCard product={product} setSelectedItems={setSelectedItems} />
         );
-        await user.click(screen.getByText("Add to cart"));
+
         await user.type(screen.getByPlaceholderText("Amount"), "3");
         await user.click(screen.getByText("Add to cart"));
-        expect(setSelectedItems).toBeCalledTimes(2);
+
+        expect(setSelectedItems).toBeCalledTimes(1);
     });
+
+    it("doesnt add if empty input", async () => {
+        const setSelectedItems = vi.fn();
+        const user = userEvent.setup();
+        render(
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+        );
+
+        await user.click(screen.getByText("Add to cart"));
+
+        expect(setSelectedItems).not.toBeCalled();
+    });
+    it("changes to default amount after adding to cart", async () => {
+        const setSelectedItems = vi.fn();
+        const user = userEvent.setup();
+        render(
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+        );
+
+        await user.type(screen.getByPlaceholderText("Amount"), "3");
+        await user.click(screen.getByText("Add to cart"));
+
+        expect(screen.getByPlaceholderText("Amount")).toHaveTextContent("");
+    });
+
     it("renders correctly", () => {
         const setSelectedItems = vi.fn();
         const { container } = render(
             <ItemCard product={product} setSelectedItems={setSelectedItems} />
         );
+
         expect(container).toMatchSnapshot();
     });
 });
