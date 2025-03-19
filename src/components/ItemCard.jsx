@@ -4,7 +4,6 @@ export default function ItemCard({ product, setSelectedItems }) {
     const [inputValue, setinputValue] = useState("");
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(1);
         const formData = new FormData(e.currentTarget);
         const item = {
             amount: Number(formData.get(`${product.title}-amount`)),
