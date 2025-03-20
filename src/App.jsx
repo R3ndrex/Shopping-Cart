@@ -37,8 +37,8 @@ function App() {
                             to="shopping-cart"
                             className={({ isActive }) =>
                                 isActive
-                                    ? "bg-[#a33298] flex ml-auto text-white navlink"
-                                    : "flex ml-auto navlink"
+                                    ? "bg-[#a33298] flex gap-[1rem] ml-auto text-white navlink"
+                                    : "flex gap-[1rem] ml-auto navlink"
                             }
                         >
                             {amount} <ShoppingCartIcon className="h-[3rem] " />
