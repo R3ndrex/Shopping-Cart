@@ -31,7 +31,7 @@ export default function Pagination({ setter, value, min, max }) {
     }
 
     return (
-        <div className="flex gap-[1rem] justify-center m-[1rem] items-center ">
+        <div className="flex gap-[1rem] justify-center m-[2rem] items-center ">
             <ChevronDoubleLeftIcon
                 onClick={handleLeftMaxClick}
                 className="h-[2rem] cursor-pointer"
