@@ -15,13 +15,13 @@ export default function ImageSlider({ images, alt }) {
         <div className="relative">
             <ChevronLeftIcon
                 onClick={handleLeftClick}
-                className="absolute left-0 h-[3rem] top-1/2"
+                className="absolute left-0 h-[3rem] top-1/2 cursor-pointer"
                 data-testid="left-chevron"
             />
             <img src={images[index]} alt={alt} className="w-max" />
             <ChevronRightIcon
                 onClick={handleRightClick}
-                className="absolute right-0 h-[3rem] top-1/2"
+                className="absolute right-0 h-[3rem] top-1/2 cursor-pointer"
                 data-testid="right-chevron"
             />
         </div>
