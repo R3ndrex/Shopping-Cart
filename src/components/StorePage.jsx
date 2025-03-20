@@ -9,7 +9,7 @@ export default function StorePage() {
         `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=10`,
         { mode: "cors" }
     );
-    const setSelectedItems = useOutletContext();
+    const [setSelectedItems] = useOutletContext();
     return (
         <>
             <main>
@@ -26,7 +26,7 @@ export default function StorePage() {
                         ))}
                     </ul>
                 )}
-                <Pagination setter={setPage} value={page} min={0} max={4} />
+                <Pagination setter={setPage} value={page} min={0} max={3} />
             </main>
         </>
     );
