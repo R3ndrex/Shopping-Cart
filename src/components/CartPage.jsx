@@ -42,7 +42,7 @@ export default function CartPage() {
                     </li>
                 ))}
             </ul>
-            <div>
+            <div className="mb-[1rem]">
                 Cost: <strong> {allItemsPrice} $</strong>
             </div>
         </>
