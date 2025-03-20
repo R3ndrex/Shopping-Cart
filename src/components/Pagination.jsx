@@ -35,19 +35,25 @@ export default function Pagination({ setter, value, min, max }) {
             <ChevronDoubleLeftIcon
                 onClick={handleLeftMaxClick}
                 className="h-[2rem] cursor-pointer"
+                data-testid="chevron-max-left"
             />
             <ChevronLeftIcon
                 onClick={handleLeftClick}
                 className="h-[2rem] cursor-pointer"
+                data-testid="chevron-left"
             />
-            <div className="font-bold">{value + 1}</div>
+            <span data-testid="value-container" className="font-bold">
+                {value + 1}
+            </span>
             <ChevronRightIcon
                 onClick={handleRightClick}
                 className="h-[2rem] cursor-pointer"
+                data-testid="chevron-right"
             />
             <ChevronDoubleRightIcon
                 onClick={handleRightMaxClick}
                 className="h-[2rem] cursor-pointer"
+                data-testid="chevron-max-right"
             />
         </div>
     );
