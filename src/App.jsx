@@ -10,42 +10,44 @@ function App() {
     );
     return (
         <>
-            <nav className="navbar">
-                <ul>
-                    <NavLink
-                        to=""
-                        className={({ isActive }) =>
-                            isActive
-                                ? "bg-blue-500 text-white navlink"
-                                : "navlink"
-                        }
-                    >
-                        Main
-                    </NavLink>
-                    <NavLink
-                        to="store"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "bg-blue-500 text-white navlink"
-                                : "navlink"
-                        }
-                    >
-                        Store Page
-                    </NavLink>
-                    <NavLink
-                        to="shopping-cart"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "bg-blue-500 flex ml-auto text-white navlink"
-                                : "flex ml-auto navlink"
-                        }
-                    >
-                        {amount} <ShoppingCartIcon className="h-[3rem] " />
-                    </NavLink>
-                </ul>
-            </nav>
+            <header>
+                <nav className="navbar">
+                    <ul>
+                        <NavLink
+                            to=""
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "bg-[#a33298] text-white navlink"
+                                    : "navlink"
+                            }
+                        >
+                            Main
+                        </NavLink>
+                        <NavLink
+                            to="store"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "bg-[#a33298] text-white navlink"
+                                    : "navlink"
+                            }
+                        >
+                            Store Page
+                        </NavLink>
+                        <NavLink
+                            to="shopping-cart"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "bg-[#a33298] flex ml-auto text-white navlink"
+                                    : "flex ml-auto navlink"
+                            }
+                        >
+                            {amount} <ShoppingCartIcon className="h-[3rem] " />
+                        </NavLink>
+                    </ul>
+                </nav>
+            </header>
             <main>
-                <Outlet context={setSelectedItems} />
+                <Outlet context={[setSelectedItems, selecteditems]} />
             </main>
         </>
     );
