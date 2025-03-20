@@ -10,7 +10,7 @@
 }
 .store-items {
     display: grid;
-    gap: 1rem;
+    gap: 2rem 1rem;
     grid-template-columns: repeat(5, minmax(250px, 1fr));
 }
 .store-item {
