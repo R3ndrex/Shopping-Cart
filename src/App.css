@@ -23,6 +23,7 @@
         align-self: start;
     }
 }
+
 .navbar {
     > ul {
         display: flex;
@@ -37,4 +38,17 @@
 .navlink {
     display: flex;
     align-items: center;
+}
+.item-li-shopping-cart {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
+    grid-template-columns: minmax(min-content, 200px) 1fr;
+    grid-template-rows: repeat(3, min-content);
+    padding: 1rem;
+    border: 1px solid black;
+    & img {
+        grid-row: 1/-1;
+        grid-column: 1/2;
+    }
 }
