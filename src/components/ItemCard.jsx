@@ -5,20 +5,29 @@ export default function ItemCard({ product, setSelectedItems }) {
     function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
+        const amount = Number(formData.get(`${product.title}-amount`));
         const item = {
-            amount: Number(formData.get(`${product.title}-amount`)),
+            amount: amount,
             title: product.title,
             price: product.price,
+            image: product.images[0],
+            description: product.description,
         };
+        if (isNaN(amount) || amount <= 0) {
+            console.error("Please enter a valid amount");
+            return;
+        }
         setSelectedItems((prev) => {
-            if (prev.some((element) => element.title === item.title)) {
-                return prev.map((element) => {
-                    if (element.title === item.title)
-                        return {
-                            ...element,
-                            amount: element.amount + item.amount,
-                        };
-                });
+            const existingItem = prev.find(
+                (element) => element.title === item.title
+            );
+
+            if (existingItem) {
+                return prev.map((element) =>
+                    element.title === item.title
+                        ? { ...element, amount: element.amount + item.amount }
+                        : element
+                );
             }
             return [...prev, item];
         });
