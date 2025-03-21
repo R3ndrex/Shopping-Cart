@@ -6,27 +6,40 @@ import Pagination from "./Pagination.jsx";
 export default function StorePage() {
     const [page, setPage] = useState(0);
     const [products, error, loading] = useFetchData(
-        `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=10`,
-        { mode: "cors" }
+        `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=10`
     );
     const [setSelectedItems] = useOutletContext();
     return (
         <>
             <main>
                 {loading && <div>Loading...</div>}
-                {error && <div>{error.message}</div>}
-                {products && (
-                    <ul className="store-items">
-                        {products.map((product) => (
-                            <ItemCard
-                                key={product.id}
-                                setSelectedItems={setSelectedItems}
-                                product={product}
-                            />
-                        ))}
-                    </ul>
+                {error && (
+                    <div className="flex flex-col justify-center items-center gap-[1rem]">
+                        <h1>
+                            Oops, it seems there was an error with getting data
+                        </h1>
+                        <p>Error: {error.message}</p>
+                    </div>
                 )}
-                <Pagination setter={setPage} value={page} min={0} max={3} />
+                {products && (
+                    <>
+                        <ul className="store-items">
+                            {products.map((product) => (
+                                <ItemCard
+                                    key={product.id}
+                                    setSelectedItems={setSelectedItems}
+                                    product={product}
+                                />
+                            ))}
+                        </ul>
+                        <Pagination
+                            setter={setPage}
+                            value={page}
+                            min={0}
+                            max={3}
+                        />
+                    </>
+                )}
             </main>
         </>
     );
