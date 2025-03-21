@@ -28,8 +28,9 @@ export default function CartPage() {
             return;
         });
     }
+
     return (
-        <>
+        <main>
             {selectedItems.length > 1 ? (
                 <>
                     <ul>
@@ -59,6 +60,6 @@ export default function CartPage() {
                     </button>
                 </div>
             )}
-        </>
+        </main>
     );
 }
