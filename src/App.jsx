@@ -46,9 +46,7 @@ function App() {
                     </ul>
                 </nav>
             </header>
-            <main>
-                <Outlet context={[setSelectedItems, selecteditems]} />
-            </main>
+            <Outlet context={[setSelectedItems, selecteditems]} />
         </>
     );
 }
