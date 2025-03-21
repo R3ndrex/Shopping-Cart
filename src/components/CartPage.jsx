@@ -1,9 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
-
+import ConfirmPurchase from "./ConfirmPurchase";
+import CartPageItem from "./CartPageItem";
 export default function CartPage() {
     const navigate = useNavigate();
     const [setSelectedItems, selectedItems] = useOutletContext();
+    const [confirm, setConfirm] = useState(false);
     const allItemsPrice = useMemo(
         () =>
             selectedItems.reduce(
@@ -12,54 +14,78 @@ export default function CartPage() {
             ),
         [selectedItems]
     );
-    function handleAdd(item) {
+
+    function ChangeItemsAmount(item, amount) {
         setSelectedItems((prev) => {
             const existingItem = prev.find(
                 (element) => element.title === item.title
             );
 
             if (existingItem) {
-                return prev.map((element) =>
-                    element.title === item.title
-                        ? { ...element, amount: element.amount + 1 }
-                        : element
-                );
+                return prev.map((element) => {
+                    if (element.title === item.title) {
+                        if (item.amount + amount <= 0) {
+                            removeItem(item);
+                        }
+                        return { ...element, amount: element.amount + amount };
+                    }
+                    return element;
+                });
             }
-            return;
+            return prev;
+        });
+    }
+    function handleIncrementAmount(item) {
+        ChangeItemsAmount(item, 1);
+    }
+    function handleDecrementAmount(item) {
+        ChangeItemsAmount(item, -1);
+    }
+
+    function removeItem(item) {
+        setSelectedItems((prev) => {
+            const existingItem = prev.find(
+                (element) => element.title === item.title
+            );
+
+            if (existingItem)
+                return prev.filter((element) => element.title !== item.title);
+
+            return prev;
         });
     }
 
     return (
-        <main>
-            {selectedItems.length > 1 ? (
-                <>
+        <>
+            {selectedItems.length !== 0 ? (
+                <main>
                     <ul>
                         {selectedItems.map((item) => (
-                            <li className="item-li-shopping-cart">
-                                <h2>{item.title}</h2>
-                                <img src={item.image} alt={item.title} />
-                                <p>{item.description}</p>
-                                <div>
-                                    Amount: {item.amount}{" "}
-                                    <button onClick={() => handleAdd(item)}>
-                                        Add
-                                    </button>
-                                </div>
-                            </li>
+                            <CartPageItem
+                                item={item}
+                                handleDecrementAmount={handleDecrementAmount}
+                                handleIncrementAmount={handleIncrementAmount}
+                            />
                         ))}
                     </ul>
                     <div className="mb-[1rem]">
                         Cost: <strong> {allItemsPrice} $</strong>
+                        <button onClick={() => setConfirm(true)}>Buy</button>
                     </div>
-                </>
+                    <ConfirmPurchase
+                        show={confirm}
+                        setShow={setConfirm}
+                        setSelectedItems={setSelectedItems}
+                    />
+                </main>
             ) : (
-                <div className="flex flex-col gap-[1rem] items-center m-[2rem]">
+                <main className="flex flex-col gap-[1rem] items-center m-[2rem]">
                     <h1>Your cart is empty </h1>
                     <button onClick={() => navigate("/store")}>
                         Go to store page
                     </button>
-                </div>
+                </main>
             )}
-        </main>
+        </>
     );
 }
