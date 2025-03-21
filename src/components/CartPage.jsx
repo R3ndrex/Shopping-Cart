@@ -69,7 +69,7 @@ export default function CartPage() {
                             />
                         ))}
                     </ul>
-                    <div className="mb-[1rem]">
+                    <div className="mb-[1rem] flex gap-[1rem] items-center justify-end">
                         Cost: <strong> {allItemsPrice} $</strong>
                         <button onClick={() => setConfirm(true)}>Buy</button>
                     </div>
