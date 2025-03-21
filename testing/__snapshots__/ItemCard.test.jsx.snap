@@ -29,6 +29,7 @@ exports[`Item Card > renders correctly 1`] = `
       <img
         alt="Title"
         class="w-max"
+        src="a"
       />
       <svg
         aria-hidden="true"
