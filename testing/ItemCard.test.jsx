@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 const product = {
     title: "Title",
     price: 3.33,
-    images: ["", "", ""],
+    images: ["a", "b", "c"],
 };
 
 describe("Item Card", () => {
@@ -16,8 +16,8 @@ describe("Item Card", () => {
             <ItemCard product={product} setSelectedItems={setSelectedItems} />
         );
 
-        await user.type(screen.getByPlaceholderText("Amount"), "3");
-        await user.click(screen.getByText("Add to cart"));
+        await user.type(screen.getByPlaceholderText(/amount/i), "3");
+        await user.click(screen.getByText(/add to cart/i));
 
         expect(setSelectedItems).toBeCalledTimes(1);
     });
@@ -29,7 +29,7 @@ describe("Item Card", () => {
             <ItemCard product={product} setSelectedItems={setSelectedItems} />
         );
 
-        await user.click(screen.getByText("Add to cart"));
+        await user.click(screen.getByText(/add to cart/i));
 
         expect(setSelectedItems).not.toBeCalled();
     });
@@ -40,10 +40,10 @@ describe("Item Card", () => {
             <ItemCard product={product} setSelectedItems={setSelectedItems} />
         );
 
-        await user.type(screen.getByPlaceholderText("Amount"), "3");
-        await user.click(screen.getByText("Add to cart"));
+        await user.type(screen.getByPlaceholderText(/amount/i), "3");
+        await user.click(screen.getByText(/add to cart/i));
 
-        expect(screen.getByPlaceholderText("Amount")).toHaveTextContent("");
+        expect(screen.getByPlaceholderText(/amount/i)).toHaveTextContent("");
     });
 
     it("renders correctly", () => {
