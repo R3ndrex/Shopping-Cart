@@ -80,7 +80,7 @@ export default function CartPage() {
                     />
                 </main>
             ) : (
-                <main className="flex flex-col gap-[1rem] items-center m-[2rem]">
+                <main className="flex flex-col gap-[1rem] items-center m-[2rem] text-center">
                     <h1>Your cart is empty </h1>
                     <button onClick={() => navigate("/store")}>
                         Go to store page
