@@ -65,6 +65,7 @@ export default function CartPage() {
                                 item={item}
                                 handleDecrementAmount={handleDecrementAmount}
                                 handleIncrementAmount={handleIncrementAmount}
+                                handleRemoveItem={removeItem}
                             />
                         ))}
                     </ul>

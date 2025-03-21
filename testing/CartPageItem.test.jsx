@@ -36,6 +36,24 @@ describe("CartPageItem", () => {
 
         expect(decrementButton).toBeCalled();
     });
+
+    it("calls remove function item", async () => {
+        const remove = vi.fn();
+        const user = userEvent.setup();
+        render(
+            <CartPageItem
+                item={item}
+                handleRemoveItem={remove}
+                handleDecrementAmount={vi.fn()}
+                handleIncrementAmount={vi.fn()}
+            />
+        );
+
+        await user.click(screen.getByTestId("trash"));
+
+        expect(remove).toBeCalled();
+    });
+
     it("renders correctly", () => {
         const { container } = render(
             <CartPageItem
