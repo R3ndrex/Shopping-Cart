@@ -12,7 +12,7 @@ export default function CartPageItem({
             <h2>{item.title}</h2>
             <img src={item.image} alt={item.title} />
             <p>{item.description}</p>
-            <div className="flex gap-[1rem] text-center items-center">
+            <div className="flex gap-[1rem] text-center items-center pb-[1rem] pt-[1rem]">
                 <TrashIcon
                     data-testid="trash"
                     className="h-[2rem]"
@@ -22,8 +22,8 @@ export default function CartPageItem({
                     data-testid="minus"
                     className="h-[2rem]"
                     onClick={() => handleDecrementAmount(item)}
-                />{" "}
-                Amount: {item.amount}{" "}
+                />
+                Amount: {item.amount}
                 <PlusIcon
                     data-testid="plus"
                     className="h-[2rem]"
