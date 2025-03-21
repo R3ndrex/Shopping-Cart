@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CartPageItem > renders correctly 1`] = `
+<div>
+  <li
+    class="item-li-shopping-cart"
+  >
+    <h2>
+      name
+    </h2>
+    <img
+      alt="name"
+    />
+    <p />
+    <div
+      class="flex gap-[1rem]"
+    >
+      <svg
+        aria-hidden="true"
+        class="h-[2rem]"
+        data-slot="icon"
+        data-testid="minus"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z"
+          fill-rule="evenodd"
+        />
+      </svg>
+       
+      Amount: 
+      1
+       
+      <svg
+        aria-hidden="true"
+        class="h-[2rem]"
+        data-slot="icon"
+        data-testid="plus"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </div>
+  </li>
+</div>
+`;
