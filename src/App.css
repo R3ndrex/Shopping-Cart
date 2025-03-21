@@ -1,5 +1,6 @@
 @import "tailwindcss";
 #root {
+    min-height: calc(100vh - 1rem);
     display: flex;
     flex-direction: column;
     gap: 1rem;
