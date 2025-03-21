@@ -66,13 +66,16 @@
     grid-template-columns: minmax(min-content, 200px) 1fr;
     grid-template-rows: repeat(3, min-content);
     padding: 1rem;
-    border: 1px solid black;
+    border: 1px solid rgb(219, 168, 230);
     & img {
         grid-row: 1/-1;
         grid-column: 1/2;
     }
 }
 @media screen and (max-width: 600px) {
+    :root {
+        font-size: 0.8rem;
+    }
     .item-li-shopping-cart {
         grid-template-rows: repeat(4, min-content);
         & img {
