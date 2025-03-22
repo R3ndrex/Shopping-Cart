@@ -14,7 +14,11 @@ export default function StorePage() {
 
     return (
         <main>
-            {loading && <div>Loading...</div>}
+            {loading && (
+                <div className="flex justify-center items-center">
+                    <div className="lds-dual-ring"></div>
+                </div>
+            )}
             {error && (
                 <div className="flex flex-col justify-center items-center text-center gap-[1rem]">
                     <h1>Oops, it seems there was an error with getting data</h1>
