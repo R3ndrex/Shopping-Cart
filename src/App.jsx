@@ -21,16 +21,6 @@ function App() {
                                     : "navlink"
                             }
                         >
-                            Main
-                        </NavLink>
-                        <NavLink
-                            to="store"
-                            className={({ isActive }) =>
-                                isActive
-                                    ? "bg-[#a33298] text-white navlink"
-                                    : "navlink"
-                            }
-                        >
                             Store Page
                         </NavLink>
                         <NavLink
@@ -41,7 +31,7 @@ function App() {
                                     : "flex gap-[1rem] ml-auto navlink"
                             }
                         >
-                            {amount} <ShoppingCartIcon className="h-[3rem] " />
+                            {amount} <ShoppingCartIcon className="h-[3rem]" />
                         </NavLink>
                     </ul>
                 </nav>
