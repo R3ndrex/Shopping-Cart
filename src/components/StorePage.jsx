@@ -16,7 +16,7 @@ export default function StorePage() {
         <main>
             {loading && <div>Loading...</div>}
             {error && (
-                <div className="flex flex-col justify-center items-center gap-[1rem]">
+                <div className="flex flex-col justify-center items-center text-center gap-[1rem]">
                     <h1>Oops, it seems there was an error with getting data</h1>
                     <p>Error: {error.message}</p>
                 </div>
