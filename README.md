@@ -1,12 +1,22 @@
-# React + Vite
+# Shopping Cart Simulator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Shopping Cart Simulator is a simple and user-friendly web application for simulating online shopping. Product data is fetched from the [Fake Store API](https://fakeapi.platzi.com/en/about/introduction), and the cart allows you to add, remove, and purchase items.
 
-Currently, two official plugins are available:
+## Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   📦 Product Catalog – Browse available products with descriptions, prices, and images.
 
-## Expanding the ESLint configuration
+-   🛒 Shopping Cart – Add items, remove them, or purchase everything at once.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   🔄 Dynamic Navigation – Fast page transitions using React Router.
+
+## Screenshots
+
+![Store Page](https://i.imgur.com/w8MnN4Q.png?raw=true)
+![Cart Page](https://i.imgur.com/e0tazPq.png?raw=true)
+
+## Sources:
+
+-   Chevrons, shopping cart, plus and minus icons are from [heroicons](https://heroicons.com/outline)
+
+-   Shopping bag icon is from [Material Design Icons](https://pictogrammers.com/library/mdi/icon/shopping/)
