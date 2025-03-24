@@ -2,56 +2,46 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import CartPageItem from "../src/components/CartPageItem";
 import userEvent from "@testing-library/user-event";
+import { useOutletContext } from "react-router-dom";
+
+vi.mock("react-router-dom", () => ({
+    ...vi.importActual("react-router-dom"),
+    useOutletContext: vi.fn(),
+}));
 
 const item = { title: "name", amount: 1, cost: 4 };
 describe("CartPageItem", () => {
-    it("calls increment function items", async () => {
-        const incrementButton = vi.fn();
+    it("calls setter function on plus click", async () => {
+        const setter = vi.fn();
+        useOutletContext.mockReturnValue([setter, []]);
         const user = userEvent.setup();
-        render(
-            <CartPageItem
-                item={item}
-                handleDecrementAmount={vi.fn()}
-                handleIncrementAmount={incrementButton}
-            />
-        );
+        render(<CartPageItem item={item} />);
 
         await user.click(screen.getByTestId("plus"));
 
-        expect(incrementButton).toBeCalled();
+        expect(setter).toBeCalled();
     });
 
-    it("calls increment function items", async () => {
-        const decrementButton = vi.fn();
+    it("calls setter function on minus click", async () => {
+        const setter = vi.fn();
+        useOutletContext.mockReturnValue([setter, []]);
         const user = userEvent.setup();
-        render(
-            <CartPageItem
-                item={item}
-                handleDecrementAmount={decrementButton}
-                handleIncrementAmount={vi.fn()}
-            />
-        );
+        render(<CartPageItem item={item} />);
 
         await user.click(screen.getByTestId("minus"));
 
-        expect(decrementButton).toBeCalled();
+        expect(setter).toBeCalled();
     });
 
-    it("calls remove function item", async () => {
-        const remove = vi.fn();
+    it("calls setter function on trash click", async () => {
+        const setter = vi.fn();
+        useOutletContext.mockReturnValue([setter, []]);
         const user = userEvent.setup();
-        render(
-            <CartPageItem
-                item={item}
-                handleRemoveItem={remove}
-                handleDecrementAmount={vi.fn()}
-                handleIncrementAmount={vi.fn()}
-            />
-        );
+        render(<CartPageItem item={item} />);
 
         await user.click(screen.getByTestId("trash"));
 
-        expect(remove).toBeCalled();
+        expect(setter).toBeCalled();
     });
 
     it("renders correctly", () => {
