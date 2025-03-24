@@ -3,38 +3,34 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
 
+const MAX = 100;
+
 export default function CartPageItem({ item }) {
     const [setSelectedItems, _] = useOutletContext();
 
     function ChangeItemsAmount(item, amount) {
         setSelectedItems((prev) => {
-            const existingItem = prev.find(
-                (element) => element.title === item.title
-            );
-
-            if (existingItem) {
-                return prev.map((element) => {
-                    if (element.title === item.title) {
-                        if (item.amount + amount <= 0) {
-                            removeItem(item);
-                        }
-                        return { ...element, amount: element.amount + amount };
-                    }
-                    return element;
-                });
+            if (item.amount + amount <= 0) {
+                return removeItem(prev, item);
             }
-            return prev;
+            return prev.map((element) => {
+                if (element.title === item.title) {
+                    if (element.amount < MAX || amount < 0)
+                        return {
+                            ...element,
+                            amount: element.amount + amount,
+                        };
+                }
+                return element;
+            });
         });
     }
     const incrementAmount = (item) => ChangeItemsAmount(item, 1);
 
     const decrementAmount = (item) => ChangeItemsAmount(item, -1);
 
-    function removeItem(item) {
-        setSelectedItems((prev) =>
-            prev.filter((element) => element.title !== item.title)
-        );
-    }
+    const removeItem = (prev, item) =>
+        prev.filter((element) => element.title !== item.title);
 
     return (
         <li className="item-li-shopping-cart" key={item.id}>
@@ -45,7 +41,9 @@ export default function CartPageItem({ item }) {
                 <TrashIcon
                     data-testid="trash"
                     className="h-[2rem]"
-                    onClick={() => removeItem(item)}
+                    onClick={() =>
+                        setSelectedItems((prev) => removeItem(prev, item))
+                    }
                 />
                 <MinusIcon
                     data-testid="minus"
