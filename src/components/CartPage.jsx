@@ -15,58 +15,13 @@ export default function CartPage() {
         [selectedItems]
     );
 
-    function ChangeItemsAmount(item, amount) {
-        setSelectedItems((prev) => {
-            const existingItem = prev.find(
-                (element) => element.title === item.title
-            );
-
-            if (existingItem) {
-                return prev.map((element) => {
-                    if (element.title === item.title) {
-                        if (item.amount + amount <= 0) {
-                            removeItem(item);
-                        }
-                        return { ...element, amount: element.amount + amount };
-                    }
-                    return element;
-                });
-            }
-            return prev;
-        });
-    }
-    function handleIncrementAmount(item) {
-        ChangeItemsAmount(item, 1);
-    }
-    function handleDecrementAmount(item) {
-        ChangeItemsAmount(item, -1);
-    }
-
-    function removeItem(item) {
-        setSelectedItems((prev) => {
-            const existingItem = prev.find(
-                (element) => element.title === item.title
-            );
-
-            if (existingItem)
-                return prev.filter((element) => element.title !== item.title);
-
-            return prev;
-        });
-    }
-
     return (
         <>
             {selectedItems.length !== 0 ? (
                 <main>
                     <ul>
                         {selectedItems.map((item) => (
-                            <CartPageItem
-                                item={item}
-                                handleDecrementAmount={handleDecrementAmount}
-                                handleIncrementAmount={handleIncrementAmount}
-                                handleRemoveItem={removeItem}
-                            />
+                            <CartPageItem item={item} />
                         ))}
                     </ul>
                     <div className="mb-[1rem] flex gap-[1rem] items-center justify-end">
