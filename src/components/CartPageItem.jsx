@@ -3,7 +3,7 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
 
-const MAX = 100;
+import { MAX_ITEM_AMOUNT } from "../App";
 
 export default function CartPageItem({ item }) {
     const [setSelectedItems, _] = useOutletContext();
@@ -15,7 +15,7 @@ export default function CartPageItem({ item }) {
             }
             return prev.map((element) => {
                 if (element.title === item.title) {
-                    if (element.amount < MAX || amount < 0)
+                    if (element.amount < MAX_ITEM_AMOUNT || amount < 0)
                         return {
                             ...element,
                             amount: element.amount + amount,
