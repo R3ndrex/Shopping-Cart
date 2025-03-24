@@ -1,4 +1,7 @@
-export default function ConfirmPurchase({ show, setShow, setSelectedItems }) {
+import { useOutletContext } from "react-router-dom";
+
+export default function ConfirmPurchase({ show, setShow }) {
+    const [setSelectedItems, _] = useOutletContext();
     function handleBuying() {
         setShow(false);
         setSelectedItems([]);

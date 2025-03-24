@@ -4,7 +4,7 @@ import ConfirmPurchase from "./ConfirmPurchase";
 import CartPageItem from "./CartPageItem";
 export default function CartPage() {
     const navigate = useNavigate();
-    const [setSelectedItems, selectedItems] = useOutletContext();
+    const [_, selectedItems] = useOutletContext();
     const [confirm, setConfirm] = useState(false);
     const allItemsPrice = useMemo(
         () =>
@@ -28,11 +28,7 @@ export default function CartPage() {
                         Cost: <strong> {allItemsPrice} $</strong>
                         <button onClick={() => setConfirm(true)}>Buy</button>
                     </div>
-                    <ConfirmPurchase
-                        show={confirm}
-                        setShow={setConfirm}
-                        setSelectedItems={setSelectedItems}
-                    />
+                    <ConfirmPurchase show={confirm} setShow={setConfirm} />
                 </main>
             ) : (
                 <main className="flex flex-col gap-[1rem] items-center m-[2rem] text-center">
