@@ -1,20 +1,20 @@
 import { useState } from "react";
 import ImageSlider from "./ImageSlider.jsx";
+import { MAX_ITEM_AMOUNT } from "../App.jsx";
+
 export default function ItemCard({ product, setSelectedItems }) {
     const [inputValue, setinputValue] = useState("");
+
     function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const amount = Number(formData.get(`${product.title}-amount`));
         const item = {
+            ...product,
             amount: amount,
-            title: product.title,
-            price: product.price,
-            image: product.images[0],
-            description: product.description,
         };
         if (isNaN(amount) || amount <= 0) {
-            console.error("Please enter a valid amount");
+            console.error("This amount cannot be added");
             return;
         }
         setSelectedItems((prev) => {
@@ -41,7 +41,7 @@ export default function ItemCard({ product, setSelectedItems }) {
                 placeholder="Amount"
                 min={1}
                 value={inputValue}
-                max={100}
+                max={MAX_ITEM_AMOUNT}
                 required
                 onChange={(e) => setinputValue(e.currentTarget.value)}
                 type="number"
