@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE } from "../utils/consts";
+import { ITEMS_PER_PAGE } from "./consts";
 export default async function getPagesAmount() {
     try {
         const res = await fetch("https://api.escuelajs.co/api/v1/products");
