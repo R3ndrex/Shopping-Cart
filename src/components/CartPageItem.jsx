@@ -38,23 +38,23 @@ export default function CartPageItem({ item }) {
             <img src={item.images[0]} alt={item.title} />
             <p>{item.description}</p>
             <div className="flex gap-[1rem] text-center items-center pb-[1rem] pt-[1rem]">
-                <TrashIcon
-                    data-testid="trash"
-                    className="h-[2rem]"
-                    onClick={() =>
-                        setSelectedItems((prev) => removeItem(prev, item))
-                    }
-                />
                 <MinusIcon
                     data-testid="minus"
-                    className="h-[2rem]"
+                    className="h-[2rem] hover:cursor-pointer"
                     onClick={() => decrementAmount(item)}
                 />
                 Amount: {item.amount}
                 <PlusIcon
                     data-testid="plus"
-                    className="h-[2rem]"
+                    className="h-[2rem] hover:cursor-pointer"
                     onClick={() => incrementAmount(item)}
+                />
+                <TrashIcon
+                    data-testid="trash"
+                    className="h-[2rem] ml-auto mr-[1rem] hover:cursor-pointer"
+                    onClick={() =>
+                        setSelectedItems((prev) => removeItem(prev, item))
+                    }
                 />
             </div>
         </li>
