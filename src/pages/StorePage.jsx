@@ -1,11 +1,9 @@
-import { useOutletContext } from "react-router-dom";
-import { useEffect, useState } from "react";
-
+import { useLoaderData, useOutletContext } from "react-router-dom";
+import { useState } from "react";
 import useFetchData from "../utils/useFetchData.jsx";
-import Pagination from "./Pagination.jsx";
-import ItemCard from "./ItemCard";
-
-const ITEMS_PER_PAGE = 10;
+import Pagination from "../components/Pagination.jsx";
+import ItemCard from "../components/ItemCard.jsx";
+import { ITEMS_PER_PAGE } from "../utils/consts.js";
 
 export default function StorePage() {
     const [page, setPage] = useState(0);
@@ -13,18 +11,7 @@ export default function StorePage() {
         `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=${ITEMS_PER_PAGE}`,
     );
     const [setSelectedItems] = useOutletContext();
-    const [maxPages, setMaxPages] = useState(0);
-
-    useEffect(() => {
-        async function getAmount() {
-            const res = await fetch("https://api.escuelajs.co/api/v1/products");
-            const data = await res.json();
-            return data.length;
-        }
-        getAmount().then((res) => {
-            setMaxPages(Math.floor(res / ITEMS_PER_PAGE));
-        });
-    }, []);
+    const maxPages = useLoaderData();
     return (
         <main>
             {loading && (
@@ -33,8 +20,8 @@ export default function StorePage() {
                 </div>
             )}
             {error && (
-                <div className="flex flex-col justify-center items-center text-center gap-[1rem]">
-                    <h1>Oops, it seems there was an error with getting data</h1>
+                <div className="flex flex-col justify-center text-red-600 items-center text-center gap-[1rem]">
+                    <h1>Oops, we couldn't get products...</h1>
                     <p>Error: {error.message}</p>
                 </div>
             )}

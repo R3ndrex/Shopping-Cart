@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
-import ConfirmPurchase from "./ConfirmPurchase";
-import CartPageItem from "./CartPageItem";
+import ConfirmPurchase from "../components/ConfirmPurchase";
+import CartPageItem from "../components/CartPageItem";
+
 export default function CartPage() {
     const navigate = useNavigate();
     const [_, selectedItems] = useOutletContext();
@@ -10,9 +11,9 @@ export default function CartPage() {
         () =>
             selectedItems.reduce(
                 (prev, current) => prev + current.price * current.amount,
-                0
+                0,
             ),
-        [selectedItems]
+        [selectedItems],
     );
 
     return (

@@ -5,9 +5,9 @@ export default function ErrorPage() {
     const error = useRouteError();
 
     return (
-        <main className="flex flex-col justify-center items-center gap-[1rem]">
-            <h1>Oops, it seems there was an error...</h1>
-            <p>{error.data}</p>
+        <main className="flex text-center  flex-col justify-center items-center gap-[1rem]">
+            <h1 className="text-red-600">Page not found</h1>
+            <p className="text-red-600">{error.data}</p>
             <button onClick={() => navigate("/")}>
                 Go back to the homepage
             </button>
