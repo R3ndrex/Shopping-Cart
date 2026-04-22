@@ -8,7 +8,7 @@ import { ITEMS_PER_PAGE } from "../utils/consts.js";
 export default function StorePage() {
     const [page, setPage] = useState(0);
     const [products, error, loading] = useFetchData(
-        `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=${ITEMS_PER_PAGE}`,
+        `https://api.escuelajs.co/api/v1/products?offset=${page * ITEMS_PER_PAGE}&limit=${ITEMS_PER_PAGE}`,
     );
     const [setSelectedItems] = useOutletContext();
     const maxPages = useLoaderData();
