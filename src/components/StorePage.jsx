@@ -1,17 +1,30 @@
 import { useOutletContext } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useFetchData from "../utils/useFetchData.jsx";
 import Pagination from "./Pagination.jsx";
 import ItemCard from "./ItemCard";
 
+const ITEMS_PER_PAGE = 10;
+
 export default function StorePage() {
     const [page, setPage] = useState(0);
     const [products, error, loading] = useFetchData(
-        `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=10`
+        `https://api.escuelajs.co/api/v1/products?offset=${page * 10}&limit=${ITEMS_PER_PAGE}`,
     );
     const [setSelectedItems] = useOutletContext();
+    const [maxPages, setMaxPages] = useState(0);
 
+    useEffect(() => {
+        async function getAmount() {
+            const res = await fetch("https://api.escuelajs.co/api/v1/products");
+            const data = await res.json();
+            return data.length;
+        }
+        getAmount().then((res) => {
+            setMaxPages(Math.floor(res / ITEMS_PER_PAGE));
+        });
+    }, []);
     return (
         <main>
             {loading && (
@@ -36,7 +49,12 @@ export default function StorePage() {
                             />
                         ))}
                     </ul>
-                    <Pagination setter={setPage} value={page} min={0} max={3} />
+                    <Pagination
+                        setter={setPage}
+                        value={page}
+                        min={0}
+                        max={maxPages}
+                    />
                 </>
             )}
         </main>
