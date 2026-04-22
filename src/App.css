@@ -23,9 +23,6 @@
     transform: translate(-50%, -50%);
 }
 .confirm-container {
-    -webkit-box-shadow: 0px 0px 300px 50px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 300px 50px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 300px 50px rgba(0, 0, 0, 0.75);
     min-width: min(80%, 300px);
     top: 50%;
     left: 50%;
@@ -71,6 +68,10 @@
 .navlink {
     display: flex;
     align-items: center;
+    border: 1px solid white;
+}
+.navlink:hover {
+    border: 1px solid #a33298;
 }
 .item-li-shopping-cart {
     display: grid;
