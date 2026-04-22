@@ -43,7 +43,7 @@ export default function CartPageItem({ item }) {
                     className="h-[2rem] hover:cursor-pointer"
                     onClick={() => decrementAmount(item)}
                 />
-                Amount: {item.amount}
+                {item.amount}
                 <PlusIcon
                     data-testid="plus"
                     className="h-[2rem] hover:cursor-pointer"
