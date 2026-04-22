@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import placeholderImage from "../assets/placeholder.png";
 
 export default function ImageSlider({ images, alt }) {
     const [index, setIndex] = useState(0);
@@ -14,7 +15,15 @@ export default function ImageSlider({ images, alt }) {
     return (
         <div className="relative">
             {images.length === 1 ? (
-                <img src={images[index]} alt={alt} className="w-max" />
+                <img
+                    src={images[index]}
+                    alt={alt}
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = placeholderImage;
+                    }}
+                    className="w-max"
+                />
             ) : (
                 <>
                     <ChevronLeftIcon
@@ -22,7 +31,15 @@ export default function ImageSlider({ images, alt }) {
                         className="absolute left-0 h-[3rem] top-1/2 -translate-y-1/2 cursor-pointer"
                         data-testid="left-chevron"
                     />
-                    <img src={images[index]} alt={alt} className="w-max"></img>
+                    <img
+                        src={images[index]}
+                        alt={alt}
+                        className="w-max"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = placeholderImage;
+                        }}
+                    ></img>
                     <ChevronRightIcon
                         onClick={handleRightClick}
                         className="absolute right-0 h-[3rem] top-1/2 -translate-y-1/2 cursor-pointer"
