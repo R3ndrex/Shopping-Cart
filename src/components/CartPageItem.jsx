@@ -3,7 +3,7 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
 
-import { MAX_ITEM_AMOUNT } from "../App";
+import { MAX_ITEM_AMOUNT } from "../utils/consts";
 
 export default function CartPageItem({ item }) {
     const [setSelectedItems, _] = useOutletContext();

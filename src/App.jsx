@@ -1,14 +1,13 @@
-import { useMemo, useState } from "react";
 import "./App.css";
+import { useMemo, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Outlet, NavLink } from "react-router-dom";
 
-export const MAX_ITEM_AMOUNT = 100;
 function App() {
     const [selecteditems, setSelectedItems] = useState([]);
     const amount = useMemo(
         () => selecteditems.reduce((prev, current) => prev + current.amount, 0),
-        [selecteditems]
+        [selecteditems],
     );
     return (
         <>

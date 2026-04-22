@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ImageSlider from "./ImageSlider.jsx";
-import { MAX_ITEM_AMOUNT } from "../App.jsx";
+import { MAX_ITEM_AMOUNT } from "../utils/consts.js";
 
 export default function ItemCard({ product, setSelectedItems }) {
     const [inputValue, setinputValue] = useState("");
@@ -19,14 +19,14 @@ export default function ItemCard({ product, setSelectedItems }) {
         }
         setSelectedItems((prev) => {
             const existingItem = prev.find(
-                (element) => element.title === item.title
+                (element) => element.title === item.title,
             );
 
             if (existingItem) {
                 return prev.map((element) =>
                     element.title === item.title
                         ? { ...element, amount: element.amount + item.amount }
-                        : element
+                        : element,
                 );
             }
             return [...prev, item];

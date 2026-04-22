@@ -1,6 +1,6 @@
 import App from "./App";
-import CartPage from "./components/CartPage";
-import StorePage from "./components/StorePage";
+import CartPage from "./pages/CartPage";
+import StorePage from "./pages/StorePage";
 import ErrorPage from "./pages/ErrorPage";
 import getPagesAmount from "./components/getPagesAmount.js";
 
