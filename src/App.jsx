@@ -18,7 +18,7 @@ function App() {
                             to=""
                             className={({ isActive }) =>
                                 isActive
-                                    ? " text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[#d4e8e8] navlink"
+                                    ? " text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[var(--color-accent-hover)] navlink"
                                     : "text-[var(--color-text-muted)] navlink"
                             }
                         >
@@ -28,7 +28,7 @@ function App() {
                             to="shopping-cart"
                             className={({ isActive }) =>
                                 isActive
-                                    ? "flex gap-[1rem] text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[#d4e8e8] ml-auto navlink"
+                                    ? "flex gap-[1rem] text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[var(--color-accent-soft)] ml-auto navlink"
                                     : "flex text-[var(--color-text-muted)] gap-[1rem] ml-auto navlink"
                             }
                         >

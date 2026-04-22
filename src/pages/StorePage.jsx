@@ -20,7 +20,7 @@ export default function StorePage() {
                 </div>
             )}
             {error && (
-                <div className="flex flex-col justify-center text-[#c0392b] items-center text-center gap-[1rem]">
+                <div className="flex flex-col justify-center text-[var(--color-error)] items-center text-center gap-[1rem]">
                     <h1>Oops, we couldn't get products...</h1>
                     <p>Error: {error.message}</p>
                 </div>
