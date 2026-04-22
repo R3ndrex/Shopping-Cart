@@ -18,8 +18,8 @@ function App() {
                             to=""
                             className={({ isActive }) =>
                                 isActive
-                                    ? "bg-[#a33298] text-white navlink"
-                                    : "navlink"
+                                    ? " text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[#d4e8e8] navlink"
+                                    : "text-[var(--color-text-muted)] navlink"
                             }
                         >
                             Store Page
@@ -28,8 +28,8 @@ function App() {
                             to="shopping-cart"
                             className={({ isActive }) =>
                                 isActive
-                                    ? "bg-[#a33298] flex gap-[1rem] ml-auto text-white navlink"
-                                    : "flex gap-[1rem] ml-auto navlink"
+                                    ? "flex gap-[1rem] text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[#d4e8e8] ml-auto navlink"
+                                    : "flex text-[var(--color-text-muted)] gap-[1rem] ml-auto navlink"
                             }
                         >
                             {amount} <ShoppingCartIcon className="h-[3rem]" />
