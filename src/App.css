@@ -49,6 +49,9 @@
     display: flex;
     gap: 1rem;
     flex-direction: column;
+    & input {
+        margin-top: auto;
+    }
     & button {
         align-self: start;
     }
