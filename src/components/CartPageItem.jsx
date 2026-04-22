@@ -14,7 +14,7 @@ export default function CartPageItem({ item }) {
                 return removeItem(prev, item);
             }
             return prev.map((element) => {
-                if (element.title === item.title) {
+                if (element.id === item.id) {
                     if (element.amount < MAX_ITEM_AMOUNT || amount < 0)
                         return {
                             ...element,
