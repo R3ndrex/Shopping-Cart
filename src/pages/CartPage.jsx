@@ -22,7 +22,7 @@ export default function CartPage() {
                 <main>
                     <ul>
                         {selectedItems.map((item) => (
-                            <CartPageItem item={item} />
+                            <CartPageItem key={item.id} item={item} />
                         ))}
                     </ul>
                     <div className="mb-[1rem] flex gap-[1rem] items-center justify-end">
