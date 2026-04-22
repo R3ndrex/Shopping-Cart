@@ -1,7 +1,8 @@
 import App from "./App";
 import CartPage from "./components/CartPage";
 import StorePage from "./components/StorePage";
-import ErrorPage from "./components/ErrorPage";
+import ErrorPage from "./pages/ErrorPage";
+import getPagesAmount from "./components/getPagesAmount.js";
 
 const route = [
     {
@@ -12,6 +13,7 @@ const route = [
             {
                 index: true,
                 element: <StorePage />,
+                loader: getPagesAmount,
             },
             {
                 path: "shopping-cart",
