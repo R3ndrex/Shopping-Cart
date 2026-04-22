@@ -18,7 +18,7 @@ function App() {
                             to=""
                             className={({ isActive }) =>
                                 isActive
-                                    ? " text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[var(--color-accent-hover)] navlink"
+                                    ? "text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] bg-[var(--color-accent-soft)] navlink"
                                     : "text-[var(--color-text-muted)] navlink"
                             }
                         >
