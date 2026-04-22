@@ -48,7 +48,10 @@ export default function ItemCard({ product, setSelectedItems }) {
                 name={`${product.title}-amount`}
                 id={`${product.title}-amount`}
             />
-            <button type="submit">Add to cart</button>
+            <div className="flex justify-between pl-[1rem] items-center">
+                <span>{product.price}$</span>
+                <button type="submit">Add to cart</button>
+            </div>
         </form>
     );
 }
