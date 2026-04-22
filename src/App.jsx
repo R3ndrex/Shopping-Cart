@@ -32,7 +32,8 @@ function App() {
                                     : "flex text-[var(--color-text-muted)] gap-[1rem] ml-auto navlink"
                             }
                         >
-                            {amount} <ShoppingCartIcon className="h-[3rem]" />
+                            <ShoppingCartIcon className="h-[2.5rem]" />
+                            {amount}
                         </NavLink>
                     </ul>
                 </nav>
