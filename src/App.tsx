@@ -2,14 +2,14 @@ import "./App.css";
 import { useMemo, useState, type Dispatch, type SetStateAction } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Outlet, NavLink } from "react-router-dom";
-import type { ProductType } from "./utils/types.js";
-
-export type SelectedItemsType = ProductType & { amount: number };
+import type { SelectedItemsType } from "./utils/types.js";
 
 export type SetSelectedItemsType = Dispatch<
     SetStateAction<SelectedItemsType[]>
 >;
-export type ContextType = [SetSelectedItemsType, SelectedItemsType];
+
+export type ContextType = [SetSelectedItemsType, SelectedItemsType[]];
+
 function App() {
     const [selecteditems, setSelectedItems] = useState<SelectedItemsType[]>([]);
     const amount = useMemo(

@@ -16,3 +16,4 @@ export interface ProductType {
     creationAt: string;
     updatedAt: string;
 }
+export type SelectedItemsType = ProductType & { amount: number };

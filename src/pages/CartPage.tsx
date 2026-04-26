@@ -2,11 +2,10 @@ import { useMemo, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import ConfirmPurchase from "../components/ConfirmPurchase.js";
 import CartPageItem from "../components/CartPageItem.js";
-import type { SelectedItemsType } from "../App.js";
+import type { ContextType } from "../App.js";
 export default function CartPage() {
     const navigate = useNavigate();
-    const [_, selectedItems]: [unknown, SelectedItemsType[]] =
-        useOutletContext();
+    const [_, selectedItems]: ContextType = useOutletContext();
     const [confirm, setConfirm] = useState(false);
     const allItemsPrice = useMemo(
         () =>

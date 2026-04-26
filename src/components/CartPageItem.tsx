@@ -4,7 +4,8 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
 
 import { MAX_ITEM_AMOUNT } from "../utils/consts.js";
-import type { ContextType, SelectedItemsType } from "../App.js";
+import type { SelectedItemsType } from "../utils/types.js";
+import type { ContextType } from "../App.js";
 
 export default function CartPageItem({ item }: { item: SelectedItemsType }) {
     const [setSelectedItems]: ContextType = useOutletContext();

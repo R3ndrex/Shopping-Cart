@@ -5,14 +5,14 @@ import Pagination from "../components/Pagination.js";
 import ItemCard from "../components/ItemCard.js";
 import { ITEMS_PER_PAGE } from "../utils/consts.js";
 import type { ProductType } from "../utils/types.js";
-import type { SetSelectedItemsType } from "../App.js";
+import type { ContextType } from "../App.js";
 
 export default function StorePage() {
     const [page, setPage] = useState(0);
     const { data, error, loading } = useFetchData(
         `https://api.escuelajs.co/api/v1/products?offset=${page * ITEMS_PER_PAGE}&limit=${ITEMS_PER_PAGE}`,
     );
-    const [setSelectedItems]: [SetSelectedItemsType] = useOutletContext();
+    const [setSelectedItems]: ContextType = useOutletContext();
     const maxPages = useLoaderData();
     return (
         <main>
