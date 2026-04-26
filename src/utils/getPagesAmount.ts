@@ -5,7 +5,7 @@ export default async function getPagesAmount() {
             "https://api.escuelajs.co/api/v1/products?offset=0&limit=9000",
         );
         const data = await res.json();
-        return Math.floor(data.length / ITEMS_PER_PAGE);
+        return Math.max(0, Math.floor(data.length / ITEMS_PER_PAGE) - 1);
     } catch (e) {
         console.error(e);
         return 0;
