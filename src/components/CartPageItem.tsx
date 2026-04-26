@@ -2,6 +2,9 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { MinusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
+import placeholderImage from "../assets/placeholder.png";
+
+import type { SyntheticEvent } from "react";
 
 import { MAX_ITEM_AMOUNT } from "../utils/consts.js";
 import type { SelectedItemsType } from "../utils/types.js";
@@ -42,7 +45,15 @@ export default function CartPageItem({ item }: { item: SelectedItemsType }) {
     return (
         <li className="item-li-shopping-cart" key={item.id}>
             <h2>{item.title}</h2>
-            <img src={item.images[0]} alt={item.title} />
+            <img
+                src={item.images[0]}
+                onError={(e: SyntheticEvent<HTMLImageElement, Event>) => {
+                    const img = e.currentTarget;
+                    img.onerror = null;
+                    img.src = placeholderImage;
+                }}
+                alt={item.title}
+            />
             <p>{item.description}</p>
             <div className="flex gap-[1rem] text-center items-center pb-[1rem] pt-[1rem]">
                 <MinusIcon
