@@ -3,12 +3,13 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useOutletContext } from "react-router-dom";
 
-import { MAX_ITEM_AMOUNT } from "../utils/consts";
+import { MAX_ITEM_AMOUNT } from "../utils/consts.js";
+import type { ContextType, SelectedItemsType } from "../App.js";
 
-export default function CartPageItem({ item }) {
-    const [setSelectedItems, _] = useOutletContext();
+export default function CartPageItem({ item }: { item: SelectedItemsType }) {
+    const [setSelectedItems]: ContextType = useOutletContext();
 
-    function ChangeItemsAmount(item, amount) {
+    function changeItemsAmount(item: SelectedItemsType, amount: number) {
         setSelectedItems((prev) => {
             if (item.amount + amount <= 0) {
                 return removeItem(prev, item);
@@ -25,12 +26,17 @@ export default function CartPageItem({ item }) {
             });
         });
     }
-    const incrementAmount = (item) => ChangeItemsAmount(item, 1);
+    function incrementAmount(item: SelectedItemsType) {
+        return changeItemsAmount(item, 1);
+    }
 
-    const decrementAmount = (item) => ChangeItemsAmount(item, -1);
+    function decrementAmount(item: SelectedItemsType) {
+        return changeItemsAmount(item, -1);
+    }
 
-    const removeItem = (prev, item) =>
-        prev.filter((element) => element.title !== item.title);
+    function removeItem(prev: SelectedItemsType[], item: SelectedItemsType) {
+        return prev.filter((element) => element.id !== item.id);
+    }
 
     return (
         <li className="item-li-shopping-cart" key={item.id}>

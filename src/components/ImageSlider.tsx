@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useState, type SyntheticEvent } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import placeholderImage from "../assets/placeholder.png";
 
-export default function ImageSlider({ images, alt }) {
+interface ParamTypes {
+    images: string[];
+    alt: string;
+}
+
+export default function ImageSlider({ images, alt }: ParamTypes) {
     const [index, setIndex] = useState(0);
     function handleLeftClick() {
-        index <= 0 ? setIndex(images.length - 1) : setIndex((prev) => --prev);
+        if (index <= 0) {
+            setIndex(images.length - 1);
+            return;
+        }
+        setIndex((prev) => prev - 1);
     }
     function handleRightClick() {
-        index >= images.length - 1 ? setIndex(0) : setIndex((prev) => ++prev);
+        if (index >= images.length - 1) {
+            setIndex(0);
+            return;
+        }
+        setIndex((prev) => prev + 1);
     }
 
     return (
@@ -18,9 +31,10 @@ export default function ImageSlider({ images, alt }) {
                 <img
                     src={images[index]}
                     alt={alt}
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = placeholderImage;
+                    onError={(e: SyntheticEvent<HTMLImageElement, Event>) => {
+                        const img = e.currentTarget;
+                        img.onerror = null;
+                        img.src = placeholderImage;
                     }}
                     className="w-max"
                 />
@@ -35,9 +49,12 @@ export default function ImageSlider({ images, alt }) {
                         src={images[index]}
                         alt={alt}
                         className="w-max"
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = placeholderImage;
+                        onError={(
+                            e: SyntheticEvent<HTMLImageElement, Event>,
+                        ) => {
+                            const img = e.currentTarget;
+                            img.onerror = null;
+                            img.src = placeholderImage;
                         }}
                     ></img>
                     <ChevronRightIcon

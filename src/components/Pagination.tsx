@@ -2,8 +2,15 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
+import type { Dispatch, SetStateAction } from "react";
+interface ParamTypes {
+    setter: Dispatch<SetStateAction<number>>;
+    value: number;
+    min: number;
+    max: number;
+}
 
-export default function Pagination({ setter, value, min, max }) {
+export default function Pagination({ setter, value, min, max }: ParamTypes) {
     function handleLeftClick() {
         if (value !== min) {
             setter((prev) => --prev);

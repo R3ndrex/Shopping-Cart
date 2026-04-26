@@ -1,5 +1,6 @@
 {
     // Visit https://aka.ms/tsconfig to read more about this file
+
     "compilerOptions": {
         // File Layout
         "rootDir": "./src",
@@ -9,7 +10,7 @@
         // See also https://aka.ms/tsconfig/module
         "module": "nodenext",
         "target": "esnext",
-        "types": [],
+        "types": ["vitest/globals", "node", "@testing-library/jest-dom"],
         // For nodejs:
         // "lib": ["esnext"],
         // "types": ["node"],
@@ -40,5 +41,6 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true
-    }
+    },
+    "include": ["src", "src/testing", "vite.config.js", "global.d.ts"]
 }

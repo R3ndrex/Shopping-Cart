@@ -1,11 +1,17 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ItemCard from "../src/components/ItemCard";
-import userEvent from "@testing-library/user-event";
-const product = {
+import ItemCard from "../components/ItemCard.js";
+import type { ProductType } from "../utils/types.js";
+import { userEvent } from "@testing-library/user-event";
+const product: ProductType = {
     title: "Title",
     price: 3.33,
     images: ["a", "b", "c"],
+    id: 1,
+    slug: "title",
+    description: "",
+    creationAt: "asdas",
+    updatedAt: "",
 };
 
 describe("Item Card", () => {
@@ -13,7 +19,7 @@ describe("Item Card", () => {
         const setSelectedItems = vi.fn();
         const user = userEvent.setup();
         render(
-            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />,
         );
 
         await user.type(screen.getByPlaceholderText(/amount/i), "3");
@@ -26,7 +32,7 @@ describe("Item Card", () => {
         const setSelectedItems = vi.fn();
         const user = userEvent.setup();
         render(
-            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />,
         );
 
         await user.click(screen.getByText(/add to cart/i));
@@ -37,7 +43,7 @@ describe("Item Card", () => {
         const setSelectedItems = vi.fn();
         const user = userEvent.setup();
         render(
-            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />,
         );
 
         await user.type(screen.getByPlaceholderText(/amount/i), "3");
@@ -49,7 +55,7 @@ describe("Item Card", () => {
     it("renders correctly", () => {
         const setSelectedItems = vi.fn();
         const { container } = render(
-            <ItemCard product={product} setSelectedItems={setSelectedItems} />
+            <ItemCard product={product} setSelectedItems={setSelectedItems} />,
         );
 
         expect(container).toMatchSnapshot();

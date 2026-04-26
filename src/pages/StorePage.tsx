@@ -1,16 +1,18 @@
 import { useLoaderData, useOutletContext } from "react-router-dom";
 import { useState } from "react";
-import useFetchData from "../utils/useFetchData.jsx";
-import Pagination from "../components/Pagination.jsx";
-import ItemCard from "../components/ItemCard.jsx";
+import useFetchData from "../utils/useFetchData.js";
+import Pagination from "../components/Pagination.js";
+import ItemCard from "../components/ItemCard.js";
 import { ITEMS_PER_PAGE } from "../utils/consts.js";
+import type { ProductType } from "../utils/types.js";
+import type { SetSelectedItemsType } from "../App.js";
 
 export default function StorePage() {
     const [page, setPage] = useState(0);
-    const [products, error, loading] = useFetchData(
+    const { data, error, loading } = useFetchData(
         `https://api.escuelajs.co/api/v1/products?offset=${page * ITEMS_PER_PAGE}&limit=${ITEMS_PER_PAGE}`,
     );
-    const [setSelectedItems] = useOutletContext();
+    const [setSelectedItems]: [SetSelectedItemsType] = useOutletContext();
     const maxPages = useLoaderData();
     return (
         <main>
@@ -25,10 +27,10 @@ export default function StorePage() {
                     <p>Error: {error.message}</p>
                 </div>
             )}
-            {products && (
+            {data && (
                 <>
                     <ul className="store-items">
-                        {products.map((product) => (
+                        {data.map((product: ProductType) => (
                             <ItemCard
                                 key={product.id}
                                 setSelectedItems={setSelectedItems}

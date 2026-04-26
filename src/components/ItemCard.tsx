@@ -1,11 +1,18 @@
-import { useState } from "react";
-import ImageSlider from "./ImageSlider.jsx";
+import { useState, type FormEvent } from "react";
+import ImageSlider from "./ImageSlider.js";
 import { MAX_ITEM_AMOUNT } from "../utils/consts.js";
+import type { ProductType } from "../utils/types.js";
+import type { SetSelectedItemsType } from "../App.js";
 
-export default function ItemCard({ product, setSelectedItems }) {
+interface ParamTypes {
+    product: ProductType;
+    setSelectedItems: SetSelectedItemsType;
+}
+
+export default function ItemCard({ product, setSelectedItems }: ParamTypes) {
     const [inputValue, setinputValue] = useState("");
 
-    function handleSubmit(e) {
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const amount = Number(formData.get(`${product.title}-amount`));
@@ -18,13 +25,11 @@ export default function ItemCard({ product, setSelectedItems }) {
             return;
         }
         setSelectedItems((prev) => {
-            const existingItem = prev.find(
-                (element) => element.title === item.title,
-            );
+            const existingItem = prev.find((element) => element.id === item.id);
 
             if (existingItem) {
                 return prev.map((element) =>
-                    element.title === item.title
+                    element.id === item.id
                         ? { ...element, amount: element.amount + item.amount }
                         : element,
                 );

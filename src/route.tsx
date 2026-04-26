@@ -1,7 +1,7 @@
-import App from "./App";
-import CartPage from "./pages/CartPage";
-import StorePage from "./pages/StorePage";
-import ErrorPage from "./pages/ErrorPage";
+import App from "./App.js";
+import CartPage from "./pages/CartPage.js";
+import StorePage from "./pages/StorePage.js";
+import ErrorPage from "./pages/ErrorPage.js";
 import getPagesAmount from "./utils/getPagesAmount.js";
 
 const route = [

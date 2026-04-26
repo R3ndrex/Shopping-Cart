@@ -1,12 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ImageSlider from "../src/components/ImageSlider";
-import userEvent from "@testing-library/user-event";
+import ImageSlider from "../components/ImageSlider.js";
+import { userEvent } from "@testing-library/user-event";
 
 describe("ImageSlider", () => {
     it("render correct first image", () => {
         render(
-            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />
+            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />,
         );
 
         expect(screen.getByRole("img").getAttribute("src")).toEqual("image1");
@@ -25,7 +25,7 @@ describe("ImageSlider", () => {
     it("goes to previous image after clicking on left chevron", async () => {
         const user = userEvent.setup();
         render(
-            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />
+            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />,
         );
         const leftChevron = screen.getByTestId("left-chevron");
         const rightChevron = screen.getByTestId("right-chevron");
@@ -41,7 +41,7 @@ describe("ImageSlider", () => {
     it("goes to last image after clicking on first image left chevron", async () => {
         const user = userEvent.setup();
         render(
-            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />
+            <ImageSlider images={["image1", "image2", "image3"]} alt="test" />,
         );
 
         await user.click(screen.getByTestId("left-chevron"));
@@ -58,5 +58,14 @@ describe("ImageSlider", () => {
         await user.click(rightChevron);
 
         expect(screen.getByRole("img").getAttribute("src")).toEqual("image1");
+    });
+
+    it("doesn't have right chevron if one image", async () => {
+        render(<ImageSlider images={["image1"]} alt="test" />);
+        expect(screen.queryByTestId("right-chevron")).not.toBeInTheDocument();
+    });
+    it("doesn't have left chevron if one image", async () => {
+        render(<ImageSlider images={["image1"]} alt="test" />);
+        expect(screen.queryByTestId("left-chevron")).not.toBeInTheDocument();
     });
 });

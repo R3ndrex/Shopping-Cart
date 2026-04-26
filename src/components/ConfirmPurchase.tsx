@@ -1,7 +1,15 @@
 import { useOutletContext } from "react-router-dom";
+import type { Dispatch } from "react";
+import type { ContextType } from "../App.js";
+import type { SetStateAction } from "react";
 
-export default function ConfirmPurchase({ show, setShow }) {
-    const [setSelectedItems, _] = useOutletContext();
+interface ParamTypes {
+    show: boolean;
+    setShow: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function ConfirmPurchase({ show, setShow }: ParamTypes) {
+    const [setSelectedItems]: ContextType = useOutletContext();
     function handleBuying() {
         setShow(false);
         setSelectedItems([]);

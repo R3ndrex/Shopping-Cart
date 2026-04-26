@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE } from "./consts";
+import { ITEMS_PER_PAGE } from "./consts.js";
 export default async function getPagesAmount() {
     try {
         const res = await fetch(

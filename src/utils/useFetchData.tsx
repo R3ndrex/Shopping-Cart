@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
-
-export default function useFetchData(url) {
+import type { ProductType } from "./types.js";
+export default function useFetchData(url: string): {
+    data: ProductType[] | null;
+    error: Error | null;
+    loading: boolean;
+} {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [data, setData] = useState();
+    const [data, setData] = useState<ProductType[] | null>(null);
     useEffect(() => {
         const controller = new AbortController();
         fetch(url, {
@@ -26,5 +30,5 @@ export default function useFetchData(url) {
 
         return () => controller.abort();
     }, [url]);
-    return [data, error, loading];
+    return { data, error, loading };
 }
