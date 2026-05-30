@@ -1,5 +1,5 @@
 import ApiError from "../error/ApiError.js";
-import type { NextFunction, Request, Response } from "express";
+import type { Request, Response } from "express";
 import productService from "../services/productService.js";
 
 const UUIDLENGTH = 36;

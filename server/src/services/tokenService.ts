@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { prisma } from "../lib/prisma.js";
 import type { UserDtoType } from "../dtos/userDto.js";
-import ApiError from "../error/ApiError.js";
 class TokenService {
     async generateTokens(payload: UserDtoType) {
         if (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET) {
@@ -59,7 +58,7 @@ class TokenService {
         });
     }
     async removeRefreshToken(token: string) {
-        return await prisma.token.deleteMany({
+        return await prisma.token.delete({
             where: {
                 refreshToken: token,
             },
