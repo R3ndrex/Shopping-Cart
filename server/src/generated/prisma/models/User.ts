@@ -176,6 +176,7 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
   ratings?: Prisma.RatingListRelationFilter
+  tokens?: Prisma.TokenListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -185,6 +186,7 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   basket?: Prisma.BasketOrderByWithRelationInput
   ratings?: Prisma.RatingOrderByRelationAggregateInput
+  tokens?: Prisma.TokenOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -197,6 +199,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
   ratings?: Prisma.RatingListRelationFilter
+  tokens?: Prisma.TokenListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -226,6 +229,7 @@ export type UserCreateInput = {
   role?: $Enums.Role
   basket?: Prisma.BasketCreateNestedOneWithoutUserInput
   ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -235,6 +239,7 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.Role
   basket?: Prisma.BasketUncheckedCreateNestedOneWithoutUserInput
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -244,6 +249,7 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   basket?: Prisma.BasketUpdateOneWithoutUserNestedInput
   ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -253,6 +259,7 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   basket?: Prisma.BasketUncheckedUpdateOneWithoutUserNestedInput
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -297,6 +304,11 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
@@ -308,6 +320,22 @@ export type StringFieldUpdateOperationsInput = {
 
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
+}
+
+export type UserCreateNestedOneWithoutTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTokensInput, Prisma.UserUncheckedCreateWithoutTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTokensInput, Prisma.UserUncheckedCreateWithoutTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTokensInput
+  upsert?: Prisma.UserUpsertWithoutTokensInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTokensInput, Prisma.UserUpdateWithoutTokensInput>, Prisma.UserUncheckedUpdateWithoutTokensInput>
 }
 
 export type UserCreateNestedOneWithoutBasketInput = {
@@ -338,12 +366,65 @@ export type UserUpdateOneRequiredWithoutRatingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRatingsInput, Prisma.UserUpdateWithoutRatingsInput>, Prisma.UserUncheckedUpdateWithoutRatingsInput>
 }
 
+export type UserCreateWithoutTokensInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  basket?: Prisma.BasketCreateNestedOneWithoutUserInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTokensInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  basket?: Prisma.BasketUncheckedCreateNestedOneWithoutUserInput
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTokensInput, Prisma.UserUncheckedCreateWithoutTokensInput>
+}
+
+export type UserUpsertWithoutTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTokensInput, Prisma.UserUncheckedUpdateWithoutTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTokensInput, Prisma.UserUncheckedCreateWithoutTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTokensInput, Prisma.UserUncheckedUpdateWithoutTokensInput>
+}
+
+export type UserUpdateWithoutTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  basket?: Prisma.BasketUpdateOneWithoutUserNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  basket?: Prisma.BasketUncheckedUpdateOneWithoutUserNestedInput
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutBasketInput = {
   id?: string
   email: string
   password: string
   role?: $Enums.Role
   ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBasketInput = {
@@ -352,6 +433,7 @@ export type UserUncheckedCreateWithoutBasketInput = {
   password: string
   role?: $Enums.Role
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBasketInput = {
@@ -376,6 +458,7 @@ export type UserUpdateWithoutBasketInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBasketInput = {
@@ -384,6 +467,7 @@ export type UserUncheckedUpdateWithoutBasketInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRatingsInput = {
@@ -392,6 +476,7 @@ export type UserCreateWithoutRatingsInput = {
   password: string
   role?: $Enums.Role
   basket?: Prisma.BasketCreateNestedOneWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRatingsInput = {
@@ -400,6 +485,7 @@ export type UserUncheckedCreateWithoutRatingsInput = {
   password: string
   role?: $Enums.Role
   basket?: Prisma.BasketUncheckedCreateNestedOneWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRatingsInput = {
@@ -424,6 +510,7 @@ export type UserUpdateWithoutRatingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   basket?: Prisma.BasketUpdateOneWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -432,6 +519,7 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   basket?: Prisma.BasketUncheckedUpdateOneWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -441,10 +529,12 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
 
 export type UserCountOutputType = {
   ratings: number
+  tokens: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ratings?: boolean | UserCountOutputTypeCountRatingsArgs
+  tokens?: boolean | UserCountOutputTypeCountTokensArgs
 }
 
 /**
@@ -464,6 +554,13 @@ export type UserCountOutputTypeCountRatingsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.RatingWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TokenWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -472,6 +569,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   basket?: boolean | Prisma.User$basketArgs<ExtArgs>
   ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>
+  tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -500,6 +598,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   basket?: boolean | Prisma.User$basketArgs<ExtArgs>
   ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>
+  tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -510,6 +609,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     basket: Prisma.$BasketPayload<ExtArgs> | null
     ratings: Prisma.$RatingPayload<ExtArgs>[]
+    tokens: Prisma.$TokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -912,6 +1012,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   basket<T extends Prisma.User$basketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$basketArgs<ExtArgs>>): Prisma.Prisma__BasketClient<runtime.Types.Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ratings<T extends Prisma.User$ratingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tokens<T extends Prisma.User$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1378,6 +1479,30 @@ export type User$ratingsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
+}
+
+/**
+ * User.tokens
+ */
+export type User$tokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Token
+   */
+  select?: Prisma.TokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Token
+   */
+  omit?: Prisma.TokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenInclude<ExtArgs> | null
+  where?: Prisma.TokenWhereInput
+  orderBy?: Prisma.TokenOrderByWithRelationInput | Prisma.TokenOrderByWithRelationInput[]
+  cursor?: Prisma.TokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TokenScalarFieldEnum | Prisma.TokenScalarFieldEnum[]
 }
 
 /**

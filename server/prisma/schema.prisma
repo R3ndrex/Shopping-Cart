@@ -14,6 +14,14 @@ model User {
   role     Role     @default(USER)
   basket   Basket?
   ratings  Rating[]
+  tokens   Token[]
+}
+
+model Token {
+  id           String @id @default(uuid())
+  user         User?  @relation(fields: [userId], references: [id])
+  refreshToken String @unique
+  userId       String
 }
 
 model Basket {

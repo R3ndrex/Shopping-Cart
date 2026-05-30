@@ -10,7 +10,7 @@ class SizeController {
     async create(req: Request, res: Response, next: NextFunction) {
         const { name } = req.body;
         if (!name) {
-            return next(ApiError.badRequest("Name is not defined"));
+            throw ApiError.badRequest("Name is not defined");
         }
         const createdSize = await sizeService.createSize(name);
         return res.json({ success: true, data: createdSize });
@@ -22,7 +22,7 @@ class SizeController {
     ) {
         const { id } = req.params;
         if (!id) {
-            return next(ApiError.badRequest("Id is not defined"));
+            throw ApiError.badRequest("Id is not defined");
         }
         const deletedSize = await sizeService.deleteSize(id);
         return res.json({ success: true, data: deletedSize });

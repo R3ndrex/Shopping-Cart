@@ -5,12 +5,12 @@ import productService from "../services/productService.js";
 const UUIDLENGTH = 36;
 
 class ProductController {
-    async get(req: Request, res: Response, next: NextFunction) {
+    async get(req: Request, res: Response) {
         const { idSlug } = req.params;
         const id = String(idSlug)?.slice(0, UUIDLENGTH);
         const slug = String(idSlug)?.slice(UUIDLENGTH + 1);
         if (!id || !slug) {
-            return next(ApiError.notFound("Id or slug in not defined"));
+            throw ApiError.notFound("Id or slug in not defined");
         }
         const product = await productService.getProduct(id, slug);
         return res.json({
@@ -61,12 +61,12 @@ class ProductController {
 
         return res.json({ success: true, ...products });
     }
-    async delete(req: Request, res: Response, next: NextFunction) {
+    async delete(req: Request, res: Response) {
         const { idSlug } = req.params;
         const id = String(idSlug)?.slice(0, UUIDLENGTH);
         const slug = String(idSlug)?.slice(UUIDLENGTH + 1);
         if (!id || !slug) {
-            return next(ApiError.notFound("Id or slug in not defined"));
+            throw ApiError.notFound("Id or slug in not defined");
         }
         const deletedProduct = await productService.deleteProduct(id, slug);
         return res.json({ success: true, data: deletedProduct });

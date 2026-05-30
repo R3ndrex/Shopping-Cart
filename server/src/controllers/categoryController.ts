@@ -10,7 +10,7 @@ class CategoryController {
     async create(req: Request, res: Response, next: NextFunction) {
         const { name } = req.body;
         if (!name) {
-            return next(ApiError.badRequest("Name is not defined"));
+            throw ApiError.badRequest("Name is not defined");
         }
         const createdCategory = await categoryService.createCategory(name);
         return res.json({ success: true, data: createdCategory });
@@ -22,7 +22,7 @@ class CategoryController {
     ) {
         let { id } = req.params;
         if (!id) {
-            return next(ApiError.badRequest("Id is required"));
+            throw ApiError.badRequest("Id is required");
         }
         const deletedCategory = await categoryService.deleteCategory(id);
         return res.json({ success: true, data: deletedCategory });
