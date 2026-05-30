@@ -39,6 +39,17 @@ class UserService {
         }
         await tokenService.removeRefreshToken(refreshToken);
     }
+    async checkUserRole(userId: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+        });
+        if (!user) {
+            throw ApiError.badRequest("User doesn't exist");
+        }
+        return user.role;
+    }
     async login(email: string, password: string) {
         const user = await prisma.user.findUnique({
             where: {
