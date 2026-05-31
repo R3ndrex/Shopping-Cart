@@ -57,7 +57,7 @@ class ProductService {
         if (products.length <= 0) {
             throw ApiError.notFound("Products not found");
         }
-        const allProducts = products.map((product: ProductModel) => {
+        const allProducts = products.map((product) => {
             const defaultVariant = getDefaultVariant(product);
             const rating = getRating(product);
             return {
@@ -100,7 +100,7 @@ class ProductService {
                     createMany: { data: productInfo },
                 },
                 variants: {
-                    create: variants.map((v: Variant) => {
+                    create: variants.map((v) => {
                         return {
                             isDefault: v.isDefault,
                             color: {
