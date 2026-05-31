@@ -4,8 +4,8 @@ import userService from "../services/userService.js";
 const refreshCookieOptions = {
     maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict" as const,
+    secure: true,
+    sameSite: "none" as const,
 };
 
 class userController {
