@@ -1,3 +1,4 @@
+/src/generated
 # Logs
 logs
 *.log
@@ -24,5 +25,4 @@ dist-ssr
 *.sw?
 # Keep environment variables out of version control
 .env
-
-/src/generated/prisma
+node_modules

@@ -1,6 +1,9 @@
 import ApiError from "../error/ApiError.js";
-import type { ProductInfo } from "../generated/prisma/client.js";
-import type { ProductOrderByWithRelationInput } from "../generated/prisma/models.js";
+import type { ProductInfo, Variant } from "../generated/prisma/client.js";
+import type {
+    ProductModel,
+    ProductOrderByWithRelationInput,
+} from "../generated/prisma/models.js";
 import { prisma } from "../lib/prisma.js";
 import {
     getDefaultVariant,
@@ -54,7 +57,7 @@ class ProductService {
         if (products.length <= 0) {
             throw ApiError.notFound("Products not found");
         }
-        const allProducts = products.map((product) => {
+        const allProducts = products.map((product: ProductModel) => {
             const defaultVariant = getDefaultVariant(product);
             const rating = getRating(product);
             return {
@@ -97,7 +100,7 @@ class ProductService {
                     createMany: { data: productInfo },
                 },
                 variants: {
-                    create: variants.map((v) => {
+                    create: variants.map((v: Variant) => {
                         return {
                             isDefault: v.isDefault,
                             color: {
