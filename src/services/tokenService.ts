@@ -58,7 +58,7 @@ class TokenService {
         });
     }
     async removeRefreshToken(token: string) {
-        return await prisma.token.delete({
+        return await prisma.token.deleteMany({
             where: {
                 refreshToken: token,
             },
