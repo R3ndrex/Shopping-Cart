@@ -1,320 +1,317 @@
 import bcrypt from "bcrypt";
-import { prisma } from "../src/lib/prisma";
+import { Role } from "../src/generated/prisma/enums.js";
+import { prisma } from "../src/lib/prisma.js";
+
+const categories = ["Sneakers", "Hoodies", "Accessories"];
+const sizes = ["XS", "S", "M", "L", "XL", "One Size"];
+const colors = ["Black", "White", "Navy", "Gray", "Red", "Green"];
+
+const products = [
+    {
+        name: "Classic Runner",
+        slug: "classic-runner",
+        category: "Sneakers",
+        info: [
+            {
+                title: "Upper",
+                description: "Breathable mesh with reinforced overlays.",
+            },
+            {
+                title: "Sole",
+                description: "Lightweight foam midsole for everyday comfort.",
+            },
+        ],
+        variants: [
+            {
+                size: "M",
+                color: "White",
+                price: 89.99,
+                stock: 24,
+                isDefault: true,
+                images: [
+                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+                    "https://images.unsplash.com/photo-1549298916-b41d501d3772",
+                ],
+            },
+            {
+                size: "L",
+                color: "Black",
+                price: 94.99,
+                stock: 18,
+                isDefault: false,
+                images: [
+                    "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
+                ],
+            },
+        ],
+    },
+    {
+        name: "Everyday Hoodie",
+        slug: "everyday-hoodie",
+        category: "Hoodies",
+        info: [
+            {
+                title: "Material",
+                description: "Soft cotton fleece with a structured hood.",
+            },
+            {
+                title: "Fit",
+                description: "Relaxed fit designed for layering.",
+            },
+        ],
+        variants: [
+            {
+                size: "M",
+                color: "Navy",
+                price: 59.99,
+                stock: 32,
+                isDefault: true,
+                images: [
+                    "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
+                ],
+            },
+            {
+                size: "L",
+                color: "Gray",
+                price: 59.99,
+                stock: 27,
+                isDefault: false,
+                images: [
+                    "https://images.unsplash.com/photo-1572495641004-28421ae52e52",
+                ],
+            },
+        ],
+    },
+    {
+        name: "Canvas Tote",
+        slug: "canvas-tote",
+        category: "Accessories",
+        info: [
+            {
+                title: "Capacity",
+                description: "Roomy main compartment for daily essentials.",
+            },
+            {
+                title: "Details",
+                description: "Durable canvas handles and reinforced stitching.",
+            },
+        ],
+        variants: [
+            {
+                size: "One Size",
+                color: "Green",
+                price: 24.99,
+                stock: 45,
+                isDefault: true,
+                images: [
+                    "https://images.unsplash.com/photo-1590874103328-eac38a683ce7",
+                ],
+            },
+            {
+                size: "One Size",
+                color: "Red",
+                price: 24.99,
+                stock: 21,
+                isDefault: false,
+                images: [
+                    "https://images.unsplash.com/photo-1575032617751-6ddec2089882",
+                ],
+            },
+        ],
+    },
+];
 
 async function main() {
-    await prisma;
     console.log("Seeding...");
 
-    // --------------------
-    // Categories
-    // --------------------
-    const [tshirts, hoodies, pants] = await Promise.all([
-        prisma.category.upsert({
-            where: { name: "T-Shirts" },
-            update: {},
-            create: { name: "T-Shirts" },
-        }),
-        prisma.category.upsert({
-            where: { name: "Hoodies" },
-            update: {},
-            create: { name: "Hoodies" },
-        }),
-        prisma.category.upsert({
-            where: { name: "Pants" },
-            update: {},
-            create: { name: "Pants" },
-        }),
-    ]);
-
-    // --------------------
-    // Sizes
-    // --------------------
-    const [s, m, l, xl] = await Promise.all(
-        ["S", "M", "L", "XL"].map((name) =>
-            prisma.size.upsert({
-                where: { name },
-                update: {},
-                create: { name },
-            }),
-        ),
-    );
-
-    // --------------------
-    // Colors
-    // --------------------
-    const [black, white, navy, grey] = await Promise.all(
-        ["Black", "White", "Navy", "Grey"].map((name) =>
-            prisma.color.upsert({
-                where: { name },
-                update: {},
-                create: { name },
-            }),
-        ),
-    );
-
-    // --------------------
-    // Users
-    // --------------------
-    const adminPass = await bcrypt.hash("admin123", 10);
-    const userPass = await bcrypt.hash("user123", 10);
+    const password = await bcrypt.hash("password123", 10);
 
     const admin = await prisma.user.upsert({
-        where: { email: "admin@shop.com" },
-        update: {},
+        where: { email: "admin@example.com" },
+        update: {
+            password,
+            role: Role.ADMIN,
+        },
         create: {
-            email: "admin@shop.com",
-            password: adminPass,
-            role: "ADMIN",
+            email: "admin@example.com",
+            password,
+            role: Role.ADMIN,
         },
     });
 
-    const user = await prisma.user.upsert({
-        where: { email: "user@shop.com" },
-        update: {},
+    const customer = await prisma.user.upsert({
+        where: { email: "customer@example.com" },
+        update: {
+            password,
+            role: Role.USER,
+        },
         create: {
-            email: "user@shop.com",
-            password: userPass,
-            role: "USER",
+            email: "customer@example.com",
+            password,
+            role: Role.USER,
         },
     });
-
-    // --------------------
-    // Products with Variants
-    // --------------------
-    const productsData = [
-        {
-            name: "Classic Black Tee",
-            slug: "classic-black-tee",
-            categoryId: tshirts.id,
-            info: [
-                { title: "Material", description: "100% organic cotton" },
-                { title: "Fit", description: "Regular fit" },
-            ],
-            variants: [
-                {
-                    sizeId: m.id,
-                    colorId: black.id,
-                    price: 29.99,
-                    stock: 10,
-                    images: ["https://picsum.photos/seed/tee1/600/800"],
-                },
-                {
-                    sizeId: l.id,
-                    colorId: black.id,
-                    price: 29.99,
-                    stock: 6,
-                    images: ["https://picsum.photos/seed/tee1b/600/800"],
-                },
-            ],
-        },
-        {
-            name: "White Essential Tee",
-            slug: "white-essential-tee",
-            categoryId: tshirts.id,
-            info: [
-                { title: "Material", description: "95% cotton, 5% elastane" },
-                { title: "Care", description: "Machine wash 30°C" },
-            ],
-            variants: [
-                {
-                    sizeId: s.id,
-                    colorId: white.id,
-                    price: 24.99,
-                    stock: 12,
-                    images: ["https://picsum.photos/seed/tee2/600/800"],
-                },
-            ],
-        },
-        {
-            name: "Navy Pullover Hoodie",
-            slug: "navy-pullover-hoodie",
-            categoryId: hoodies.id,
-            info: [
-                {
-                    title: "Material",
-                    description: "80% cotton, 20% polyester fleece",
-                },
-                {
-                    title: "Features",
-                    description: "Kangaroo pocket, ribbed cuffs",
-                },
-            ],
-            variants: [
-                {
-                    sizeId: l.id,
-                    colorId: navy.id,
-                    price: 64.99,
-                    stock: 8,
-                    images: ["https://picsum.photos/seed/hoodie1/600/800"],
-                },
-            ],
-        },
-        {
-            name: "Grey Zip Hoodie",
-            slug: "grey-zip-hoodie",
-            categoryId: hoodies.id,
-            info: [
-                {
-                    title: "Material",
-                    description: "75% cotton, 25% polyester",
-                },
-                {
-                    title: "Features",
-                    description: "Full zip, side pockets",
-                },
-            ],
-            variants: [
-                {
-                    sizeId: xl.id,
-                    colorId: grey.id,
-                    price: 74.99,
-                    stock: 5,
-                    images: ["https://picsum.photos/seed/hoodie2/600/800"],
-                },
-            ],
-        },
-        {
-            name: "Black Slim Pants",
-            slug: "black-slim-pants",
-            categoryId: pants.id,
-            info: [
-                { title: "Material", description: "98% cotton, 2% elastane" },
-                { title: "Fit", description: "Slim fit, mid-rise" },
-            ],
-            variants: [
-                {
-                    sizeId: m.id,
-                    colorId: black.id,
-                    price: 89.99,
-                    stock: 7,
-                    images: ["https://picsum.photos/seed/pants1/600/800"],
-                },
-            ],
-        },
-    ];
-
-    // --------------------
-    // Create Products + Variants
-    // --------------------
-    const createdProducts: any[] = [];
-
-    for (const p of productsData) {
-        const product = await prisma.product.upsert({
-            where: { slug: p.slug },
-            update: {},
-            create: {
-                name: p.name,
-                slug: p.slug,
-                categoryId: p.categoryId,
-
-                productInfo: {
-                    create: p.info,
-                },
-
-                variants: {
-                    create: p.variants.map((v) => ({
-                        sizeId: v.sizeId,
-                        colorId: v.colorId,
-                        price: v.price,
-                        stock: v.stock,
-
-                        images: {
-                            create: v.images.map((url) => ({ url })),
-                        },
-                    })),
-                },
-            },
-            include: {
-                variants: true,
-            },
-        });
-
-        createdProducts.push(product);
-    }
-    await Promise.all([
-        prisma.rating.upsert({
-            where: {
-                productId_userId: {
-                    productId: createdProducts[0].id,
-                    userId: user.id,
-                },
-            },
-            create: {
-                productId: createdProducts[0].id,
-                userId: user.id,
-                rating: 4.5,
-            },
-            update: {},
-        }),
-        prisma.rating.upsert({
-            where: {
-                productId_userId: {
-                    productId: createdProducts[2].id,
-                    userId: user.id,
-                },
-            },
-            create: {
-                productId: createdProducts[2].id,
-                userId: user.id,
-                rating: 5.0,
-            },
-            update: {},
-        }),
-        prisma.rating.upsert({
-            where: {
-                productId_userId: {
-                    productId: createdProducts[4].id,
-                    userId: user.id,
-                },
-            },
-            create: {
-                productId: createdProducts[4].id,
-                userId: user.id,
-                rating: 4.0,
-            },
-            update: {},
-        }),
-    ]);
 
     const basket = await prisma.basket.upsert({
-        where: { userId: user.id },
+        where: { userId: customer.id },
         update: {},
-        create: { userId: user.id },
+        create: { userId: customer.id },
     });
 
-    const firstVariant = createdProducts[0].variants[0];
-    const thirdVariant = createdProducts[2].variants[0];
+    const categoryByName = new Map<string, string>();
+    for (const name of categories) {
+        const category = await prisma.category.upsert({
+            where: { name },
+            update: {},
+            create: { name },
+        });
+        categoryByName.set(name, category.id);
+    }
 
-    await Promise.all([
-        prisma.basketItem.upsert({
+    const sizeByName = new Map<string, string>();
+    for (const name of sizes) {
+        const size = await prisma.size.upsert({
+            where: { name },
+            update: {},
+            create: { name },
+        });
+        sizeByName.set(name, size.id);
+    }
+
+    const colorByName = new Map<string, string>();
+    for (const name of colors) {
+        const color = await prisma.color.upsert({
+            where: { name },
+            update: {},
+            create: { name },
+        });
+        colorByName.set(name, color.id);
+    }
+
+    for (const productData of products) {
+        const categoryId = categoryByName.get(productData.category);
+        if (!categoryId) {
+            throw new Error(`Missing category: ${productData.category}`);
+        }
+
+        await prisma.product.upsert({
+            where: { slug: productData.slug },
+            update: {
+                name: productData.name,
+                categoryId,
+                productInfo: {
+                    deleteMany: {},
+                    create: productData.info,
+                },
+                variants: {
+                    deleteMany: {},
+                    create: productData.variants.map((variant) => {
+                        const sizeId = sizeByName.get(variant.size);
+                        const colorId = colorByName.get(variant.color);
+                        if (!sizeId || !colorId) {
+                            throw new Error(
+                                `Missing size or color for ${productData.slug}`,
+                            );
+                        }
+
+                        return {
+                            sizeId,
+                            colorId,
+                            price: variant.price,
+                            stock: variant.stock,
+                            isDefault: variant.isDefault,
+                            images: {
+                                create: variant.images.map((url) => ({ url })),
+                            },
+                        };
+                    }),
+                },
+            },
+            create: {
+                name: productData.name,
+                slug: productData.slug,
+                categoryId,
+                productInfo: {
+                    create: productData.info,
+                },
+                variants: {
+                    create: productData.variants.map((variant) => {
+                        const sizeId = sizeByName.get(variant.size);
+                        const colorId = colorByName.get(variant.color);
+                        if (!sizeId || !colorId) {
+                            throw new Error(
+                                `Missing size or color for ${productData.slug}`,
+                            );
+                        }
+
+                        return {
+                            sizeId,
+                            colorId,
+                            price: variant.price,
+                            stock: variant.stock,
+                            isDefault: variant.isDefault,
+                            images: {
+                                create: variant.images.map((url) => ({ url })),
+                            },
+                        };
+                    }),
+                },
+            },
+        });
+    }
+
+    const seededProducts = await prisma.product.findMany({
+        where: {
+            slug: {
+                in: products.map((product) => product.slug),
+            },
+        },
+        include: {
+            variants: true,
+        },
+    });
+
+    for (const product of seededProducts) {
+        await prisma.rating.upsert({
+            where: {
+                productId_userId: {
+                    productId: product.id,
+                    userId: customer.id,
+                },
+            },
+            update: {
+                rating: 4.5,
+            },
+            create: {
+                productId: product.id,
+                userId: customer.id,
+                rating: 4.5,
+            },
+        });
+    }
+
+    const defaultVariant = seededProducts
+        .flatMap((product) => product.variants)
+        .find((variant) => variant.isDefault);
+
+    if (defaultVariant) {
+        await prisma.basketItem.upsert({
             where: {
                 basketId_variantId: {
                     basketId: basket.id,
-                    variantId: firstVariant.id,
+                    variantId: defaultVariant.id,
                 },
             },
-            update: {},
-            create: {
-                basketId: basket.id,
-                variantId: firstVariant.id,
+            update: {
                 quantity: 2,
             },
-        }),
-        prisma.basketItem.upsert({
-            where: {
-                basketId_variantId: {
-                    basketId: basket.id,
-                    variantId: thirdVariant.id,
-                },
-            },
-            update: {},
             create: {
                 basketId: basket.id,
-                variantId: thirdVariant.id,
-                quantity: 1,
+                variantId: defaultVariant.id,
+                quantity: 2,
             },
-        }),
-    ]);
+        });
+    }
 
     console.log("Seeding done");
 }
