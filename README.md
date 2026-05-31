@@ -1,55 +1,36 @@
-# ShopFlow
-
-A modern shopping cart application built with React, TypeScript, and Vite.
-The app fetches products from the EscuelaJS API and lets users browse items, add them to the cart, adjust quantities, and complete a purchase flow.
-
-## Features
-
-- Product list with pagination
-- Cart counter in the top navigation
-- Add items to cart from the store page
-- Increase, decrease, or remove cart items
-- Image fallback for broken product images
-- Purchase confirmation modal
-- Route-level error page for unexpected failures
-
-## Tech Stack
-
-- React 19
-- TypeScript
-- React Router
-- Vite
-- Tailwind CSS
-- Heroicons
-- Vitest + Testing Library
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
+First, run the development server:
+
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open the local URL shown in the terminal (usually `http://localhost:5173`).
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Available Scripts
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- `npm run dev` - start the development server
-- `npm run build` - create a production build
-- `npm run preview` - preview the production build locally
-- `npm run lint` - run ESLint
-- `npm run test` - run tests with Vitest UI
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Data Source
+## Learn More
 
-Product data comes from the [EscuelaJS API](https://api.escuelajs.co/api/v1/products).
+To learn more about Next.js, take a look at the following resources:
 
-## Credits
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Icons from [Heroicons](https://heroicons.com/)
-- Shopping bag icon from [Material Design Icons](https://pictogrammers.com/library/mdi/icon/shopping/)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Screenshots
+## Deploy on Vercel
 
-![Store Page](https://i.imgur.com/w8MnN4Q.png?raw=true)
-![Cart Page](https://i.imgur.com/e0tazPq.png?raw=true)
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
