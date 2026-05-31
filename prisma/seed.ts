@@ -124,7 +124,7 @@ const products = [
 async function main() {
     console.log("Seeding...");
 
-    const password = await bcrypt.hash("password123", 10);
+    const password = await bcrypt.hash("Password123", 10);
 
     const admin = await prisma.user.upsert({
         where: { email: "admin@example.com" },
