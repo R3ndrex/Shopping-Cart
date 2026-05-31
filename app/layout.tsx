@@ -39,10 +39,10 @@ export default function RootLayout({
                 geistMono.variable,
                 "font-sans",
                 roboto.variable,
-                geistHeading.variable
+                geistHeading.variable,
             )}
         >
-            <body className="min-h-full flex flex-col">
+            <body className="min-h-full flex flex-col mt-20">
                 <Header amount={amount} />
                 {children}
             </body>

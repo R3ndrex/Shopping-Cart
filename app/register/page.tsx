@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Page() {
     return (
-        <main className="mt-20 flex flex-col items-center ">
+        <main className="flex flex-col items-center">
             <form
                 className="flex flex-col gap-[0.5em] m-4 auth-form bg-(--color-surface) p-4 rounded-lg"
                 action=""
