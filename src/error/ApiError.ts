@@ -10,6 +10,10 @@ class ApiError extends Error {
     static notFound(message: string) {
         return new ApiError(message, 404);
     }
+
+    static forbidden(message: string) {
+        return new ApiError(message, 403);
+    }
     static unauthorized(message: string) {
         return new ApiError(message, 401);
     }

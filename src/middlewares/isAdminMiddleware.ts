@@ -8,11 +8,11 @@ export default async function isAdminMiddleware(
 ) {
     const { user } = req;
     if (!user) {
-        throw ApiError.unauthorized("Unauthorized admin access");
+        throw ApiError.unauthorized("Unauthorized");
     }
     const userRole = await userService.checkUserRole(user?.id);
     if (req.user?.role === "ADMIN" && userRole === "ADMIN") {
         return next();
     }
-    throw ApiError.unauthorized("Unauthorized admin access");
+    throw ApiError.forbidden("Forbidden");
 }
